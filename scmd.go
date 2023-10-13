@@ -22,6 +22,7 @@ func Stop() {
 	if len(os.Args) >= 3 && len(os.Args[2]) > 0 {
 		processName = os.Args[2]
 	}
+	fmt.Printf("Try to stop process [%s]\n", processName)
 
 	processes, err := process.Processes()
 	if err != nil {
