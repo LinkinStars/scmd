@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/shirou/gopsutil/v3/process"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -22,6 +23,7 @@ func Stop() {
 	if len(os.Args) >= 3 && len(os.Args[2]) > 0 {
 		processName = os.Args[2]
 	}
+	processName = filepath.Base(processName)
 	fmt.Printf("Try to stop process [%s]\n", processName)
 
 	processes, err := process.Processes()
