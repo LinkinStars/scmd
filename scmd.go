@@ -24,7 +24,9 @@ func Stop() {
 		processName = os.Args[2]
 	}
 	processName = filepath.Base(processName)
-	fmt.Printf("Try to stop process [%s]\n", processName)
+	fmt.Printf("Try to find process by name [%s]...\n", processName)
+
+	currentPid := os.Getpid()
 
 	processes, err := process.Processes()
 	if err != nil {
@@ -32,17 +34,21 @@ func Stop() {
 	}
 
 	for _, p := range processes {
+		// skip current process
+		if p.Pid == int32(currentPid) {
+			continue
+		}
 		name, _ := p.Name()
 		if !strings.Contains(name, processName) {
 			continue
 		}
 
 		cmd, _ := p.Cmdline()
-		fmt.Printf("Find process [%d][%s][%s], stop it? yes/no\n", p.Pid, name, cmd)
+		fmt.Printf("Find process [%d][%s][%s], stop it? yes(y)/no(n)\n", p.Pid, name, cmd)
 
 		var input string
 		fmt.Scanf("%s", &input)
-		if input != "yes" {
+		if input != "yes" && input != "y" {
 			continue
 		}
 
