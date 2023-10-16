@@ -1,5 +1,5 @@
 # scmd
-> Add a stop command to your application.
+> Add a stop command for your Golang application.
 
 ## Usage
 
@@ -10,14 +10,13 @@ import _ "github.com/LinkinStars/scmd"
 ## Example
 
 ```bash
-$ app stop
-
-Find process [50406][app][app], stop it? yes/no
+$ ./app stop
+Try to find process by name [app]...
+Find process [50406][app][./app run], stop it? yes(y)/no(n)
 yes
 The process has been stopped
-
 ```
 
 - `app` is your application name.
 - `50406` is pid.
-- scmd find the process by name 'app', but you can specify the process name by `app stop app-server`.
+- scmd will find the process via filename by default, but you can specify the process name by `./app stop app-server`.
